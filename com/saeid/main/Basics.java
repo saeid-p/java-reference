@@ -54,8 +54,7 @@ public class Basics {
         String formatted = String.format(Locale.US, "$,d", 10000);
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("str 1").append("str 2");
-        String stringBuilt = stringBuilder.toString();
+        String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
 
         Instant now = Instant.now();
         
