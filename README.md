@@ -7,6 +7,9 @@ You can compile the Java file using this command:
 This produces a file called "EntryPoint.class", which we can then run as follows:
 `$ java EntryPoint`
 
+If the command requires command-line arguments, add them after the <jar-path>. For example:
+`$ java -jar <jar-path> arg1 arg2 arg3`
+
 - The source filename "EntryPoint.java" must match the class name in the source file.
     - If they don't match, you will get a compilation error.
 - The bytecode filename "EntryPoint.class" corresponds to the classname.
@@ -22,7 +25,7 @@ If we wanted to declare a class in a package call com.saeid.main, we can define 
     - E.g. `com.saeid.main`.
 
 ## Compiling multiple files
-You can compile multiple files at the same time by listing the pathnames:
+You can compile multiple files at the same time by listing the pathn ames:
 `$ javac Foo.java Bar.java`
 
 You can use command shell's filename wildcard functionality:
@@ -40,11 +43,18 @@ For an executable JAR file, the runtime classpath is specified by the "Class-Pat
     - Suppose that we have a Java application in the "myApp.jar" file whose entry point class is com.example.MyApp. Suppose also that the application depends on library JAR files "lib/library1.jar" and "lib/library2.jar". We could launch the application using the java command as follows in a command line:
 ```
 $ java -cp myApp.jar:lib/library1.jar:lib/library2.jar com.example.MyApp
+
 $ # Alternative 2
 $ export CLASSPATH=myApp.jar:lib/library1.jar:lib/library2.jar
 $ java com.example.MyApp
 ```
 On Windows, you would use ; instead of : as the classpath separator, and you would set the (local) CLASSPATH variable using set rather than export.
+
+Unless we are using in the java -jar command syntax, the java command looks for the class to be loaded by searching the classpath; see The Classpath. The above command is relying on the default classpath being (or including) the current directory. We can be more explicit about this by specifying the classpath to be used using the -cp option.
+`$ java -cp . HelloWorld`
+This says to make the current directory (which is what "." refers to) the sole entry on the classpath.
+The -cp is an option that is processed by the java command. All options that are intended for the java command should be before the classname. Anything after the class will be treated as an command line argument for the Java application, and will be passed to application in the String[] that is passed to the main method.
+If no -cp option is provided, the java will use the classpath that is given by the CLASSPATH environment variable. If that variable is unset or empty, java uses "." as the default classpath.
 
 ## Selecting the VM type
 The -client and -server options allow you to select between two different forms of the HotSpot VM:
