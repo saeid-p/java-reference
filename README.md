@@ -45,3 +45,10 @@ $ export CLASSPATH=myApp.jar:lib/library1.jar:lib/library2.jar
 $ java com.example.MyApp
 ```
 On Windows, you would use ; instead of : as the classpath separator, and you would set the (local) CLASSPATH variable using set rather than export.
+
+## Selecting the VM type
+The -client and -server options allow you to select between two different forms of the HotSpot VM:
+- The "client" form is tuned for user applications and offers faster startup.
+- The "server" form is tuned for long running applications. It takes longer capturing statistic during JVM "warm up" which allows the JIT compiler to do a better of job of optimizing the native code.
+
+By default, the JVM will run in 64bit mode if possible, depending on the capabilities of the platform. The -d32 and -d64 options allow you to select the mode explicitly.
