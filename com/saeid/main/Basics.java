@@ -27,7 +27,7 @@ public class Basics {
 
         int counter = 5;
         while (counter > 0) {
-            System.out.println(counter--);
+            counter--;
         }
 
         int[] myArray = new int[5];
@@ -35,15 +35,16 @@ public class Basics {
             myArray[counter++] = counter;
         } while (counter != myArray.length);
 
+        int total = 0;
         // ForEach loops:
         for (int value : myArray) {
-            System.out.println(value);
+            total += value;
         }
 
         char charValue = Character.MIN_VALUE;
         char charValueAssigned = 'X';
         String stringValue = "Test";
-        System.out.println(stringValue.trim().toLowerCase().toUpperCase());
+        stringValue = stringValue.trim().toLowerCase().toUpperCase();
 
         int stringLength = stringValue.length();
         String stringConcat = stringValue.concat("Another String");
@@ -69,12 +70,13 @@ public class Basics {
         Instant now = Instant.now();
     }
 
-    private void typeChecking() {
+    private Boolean typeChecking() {
         Object baseClass = new TestBaseClass();
         // Type checking:
         if (baseClass instanceof TestBaseClass) {
-            System.out.println("It is!");
+            return true;
         }
+        return false;
     }
 
     private void underScoreUsage() {
