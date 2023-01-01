@@ -25,10 +25,23 @@ If we wanted to declare a class in a package call com.saeid.main, we can define 
 You can compile multiple files at the same time by listing the pathnames:
 `$ javac Foo.java Bar.java`
 
-Or upi can use command shell's filename wildcard functionality:
+You can use command shell's filename wildcard functionality:
 ```
 $ javac *.java
 $ javac com/example/*.java
 $ javac */**/*.java #Only works on Zsh or with globstar enabled on your shell
 ```
 
+Java is a dynamically bound language. When you run a Java application with library dependencies, the JVM needs to know where the dependencies are so that it can load classes as required. Broadly speaking, there are two ways to deal with this:
+- The application and its dependencies can be repackaged into a single JAR file that contains all of the required classes and resources.
+- The JVM can be told where to find the dependent JAR files via the runtime classpath.
+
+For an executable JAR file, the runtime classpath is specified by the "Class-Path" manifest attribute. Otherwise, the runtime classpath needs to be supplied using the -cp option or using the CLASSPATH environment variable.
+    - Suppose that we have a Java application in the "myApp.jar" file whose entry point class is com.example.MyApp. Suppose also that the application depends on library JAR files "lib/library1.jar" and "lib/library2.jar". We could launch the application using the java command as follows in a command line:
+```
+$ java -cp myApp.jar:lib/library1.jar:lib/library2.jar com.example.MyApp
+$ # Alternative 2
+$ export CLASSPATH=myApp.jar:lib/library1.jar:lib/library2.jar
+$ java com.example.MyApp
+```
+On Windows, you would use ; instead of : as the classpath separator, and you would set the (local) CLASSPATH variable using set rather than export.
