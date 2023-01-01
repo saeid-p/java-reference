@@ -27,6 +27,7 @@ public class Basics {
             myArray[counter++] = counter;
         } while (counter != myArray.length);
 
+        // ForEach loops:
         for (int value : myArray) {
             System.out.println(value);
         }
@@ -35,7 +36,7 @@ public class Basics {
         char charValueAssigned = 'X';
         String stringValue = "Test";
         System.out.println(stringValue.trim().toLowerCase().toUpperCase());
-        
+
         int stringLength = stringValue.length();
         String stringConcat = stringValue.concat("Another String");
         String stringReplaced = stringValue.replace("Test", "Replaced");
@@ -49,14 +50,22 @@ public class Basics {
         boolean areEqualCI = stringValue.equalsIgnoreCase("test");
         int compareTo = stringValue.compareTo("Test");
         int compareToCI = stringValue.compareToIgnoreCase("Test");
-        
-        // See formats here: https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
+
+        // See formats here:
+        // https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
         String formatted = String.format(Locale.US, "$,d", 10000);
 
         StringBuilder stringBuilder = new StringBuilder();
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
 
         Instant now = Instant.now();
-        
+    }
+
+    private void typeChecking() {
+        Object baseClass = new TestBaseClass();
+        // Type checking:
+        if (baseClass instanceof TestBaseClass) {
+            System.out.println("It is!");
+        }
     }
 }
