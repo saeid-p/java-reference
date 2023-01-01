@@ -17,6 +17,14 @@ public class Basics {
         double doubleValue = 0.0d;
         double doubleValueMax = Double.MAX_VALUE;
 
+        int dec = 110; // no prefix --> decimal literal
+        int bin = 0b1101110; // '0b' prefix --> binary literal
+        int oct = 0156; // '0' prefix --> octal literal
+        int hex = 0x6E; // '0x' prefix --> hexadecimal literal
+        // The octal literal can easily be a trap for semantic errors. If you define a
+        // leading '0' to your decimal literals you will get the wrong value:
+        int a = 0100; // Instead of 100, a == 64
+
         int counter = 5;
         while (counter > 0) {
             System.out.println(counter--);
@@ -67,5 +75,27 @@ public class Basics {
         if (baseClass instanceof TestBaseClass) {
             System.out.println("It is!");
         }
+    }
+
+    private void underScoreUsage() {
+        byte color = 1_2_3;
+        short yearsAnnoDomini = 2_016;
+        int socialSecurtyNumber = 999_99_9999;
+        long creditCardNumber = 1234_5678_9012_3456L;
+        float piFourDecimals = 3.14_15F;
+        double piTenDecimals = 3.14_15_92_65_35;
+
+        // This also works using prefixes for binary, octal and hexadecimal bases.
+        // (Version ≥ Java SE 7)
+        short binary = 0b0_1_0_1;
+        int octal = 07_7_7_7_7_7_7_7_0;
+        long hexBytes = 0xFF_EC_DE_5E;
+
+        // There are forbidden places to use underscores:
+        // At the beginning or end of a number (e.g. _123 or 123_ are not valid)
+        // Adjacent to a decimal point in a floating point literal (e.g. 1._23 or 1_.23)
+        // Prior to an F or L suffix (e.g. 1.23_F or 9999999_L are not valid)
+        // In positions where a string of digits is expected (e.g. 0_xFFFF is not valid)
+
     }
 }
