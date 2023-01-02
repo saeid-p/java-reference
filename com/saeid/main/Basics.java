@@ -47,25 +47,6 @@ public class Basics {
         // leading '0' to your decimal literals you will get the wrong value:
         int a = 0100; // Instead of 100, a == 64
 
-        char charValue = Character.MIN_VALUE;
-        char charValueAssigned = 'X';
-        String stringValue = "Test";
-        stringValue = stringValue.trim().toLowerCase().toUpperCase();
-
-        int stringLength = stringValue.length();
-        String stringConcat = stringValue.concat("Another String");
-        String stringReplaced = stringValue.replace("Test", "Replaced");
-        String[] splittedString = "A,B,C".split(",");
-        char charAt = stringValue.charAt(0);
-        int indexOf = stringValue.indexOf("T");
-        String substring = stringValue.substring(0, 3);
-        boolean contains = stringValue.contains("A");
-        boolean isEmpty = stringValue.isEmpty();
-        boolean areEqual = stringValue.equals("Test");
-        boolean areEqualCI = stringValue.equalsIgnoreCase("test");
-        int compareTo = stringValue.compareTo("Test");
-        int compareToCI = stringValue.compareToIgnoreCase("Test");
-
         /*
          * In Java, we can convert between integer values and floating-point values.
          * Also, since every character corresponds to a number in the Unicode encoding,
@@ -100,12 +81,54 @@ public class Basics {
     }
 
     private static void workingWithStrings() {
+        char charValue = Character.MIN_VALUE;
+        char charValueAssigned = 'X';
+
         // See formats here:
         // https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
         String formatted = String.format(Locale.US, "$,d", 10000);
 
         StringBuilder stringBuilder = new StringBuilder();
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
+
+        String stringValue = "Test";
+        stringValue = stringValue.trim().toLowerCase().toUpperCase();
+
+        int stringLength = stringValue.length();
+        String stringConcat = stringValue.concat("Another String");
+        String stringReplaced = stringValue.replace("Test", "Replaced");
+
+        String[] splittedString = "A,B,C".split(",");
+        /*
+         * split(delimiter) by default removes trailing empty strings from result array.
+         * To turn this mechanism off we need to use overloaded version of
+         * split(delimiter, limit) with limit set to negative value.
+         * The limit parameter controls the number of times the pattern is applied and
+         * therefore affects the length of the resulting array.
+         * If the limit n is greater than zero then the pattern will be applied at most
+         * n - 1 times, the array's length will be no greater than n, and the array's
+         * last entry will contain all input beyond the last matched delimiter.
+         * If n is negative, then the pattern will be applied as many times as possible
+         * and the array can have any length.
+         * If n is zero then the pattern will be applied as many times as possible, the
+         * array can have any length, and trailing empty strings will be discarded.
+         */
+        String[] split = "a,b,c ".split(",", -1);
+        // See: https://docs.oracle.com/javase/7/docs/api/java/util/StringTokenizer.html
+
+        char charAt = stringValue.charAt(0);
+        int indexOf = stringValue.indexOf("T");
+        String substring = stringValue.substring(0, 3);
+        boolean contains = stringValue.contains("A");
+        boolean isEmpty = stringValue.isEmpty();
+        boolean areEqual = stringValue.equals("Test");
+        boolean areEqualCI = stringValue.equalsIgnoreCase("test");
+        int compareTo = stringValue.compareTo("Test");
+        int compareToCI = stringValue.compareToIgnoreCase("Test");
+
+        String[] elements = { "foo", "bar", "foobar" };
+        String singleString = String.join(" + ", elements);
+        // See: https://docs.oracle.com/javase/8/docs/api/java/util/StringJoiner.html
 
         String strObj = new String("Hello!");
         String str1 = "Hello!";
@@ -129,6 +152,31 @@ public class Basics {
         if (internedStr == str1) {
             System.out.println("internedStr == str1");
         }
+
+        /*
+         * Like many Java objects, all String instances are created on the heap, even
+         * literals. When the JVM finds a String literal that has no equivalent
+         * reference in the heap, the JVM creates a corresponding String instance on the
+         * heap and it also stores a reference to the newly created String instance in
+         * the String pool. Any other references to the same String literal are replaced
+         * with the previously created String instance in the heap.
+         * 
+         * Using new operator, we force String class to create a new String object in
+         * heap space. We can use intern() method to put it into the pool or refer to
+         * other String object from string pool having same value.
+         */
+
+        /*
+         * In JDK 7, interned strings are no longer allocated in the permanent
+         * generation of the Java heap, but are instead allocated in the main part of
+         * the Java heap (known as the young and old generations), along with
+         * the other objects created by the application. This change will result in more
+         * data residing in the main Java heap, and less data in the permanent
+         * generation, and thus may require heap sizes to be adjusted.
+         * Most applications will see only relatively small differences in heap usage
+         * due to this change, but larger applications that load many classes or make
+         * heavy use of the String.intern() method will face significant differences.
+         */
     }
 
     private static void workingWithDates() {
