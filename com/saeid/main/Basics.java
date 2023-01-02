@@ -1,6 +1,7 @@
 package com.saeid.main;
 
 import java.util.Locale;
+import java.util.function.Function;
 import java.time.Instant;
 
 public class Basics {
@@ -87,6 +88,20 @@ public class Basics {
         // See formats here:
         // https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
         String formatted = String.format(Locale.US, "$,d", 10000);
+
+        /*
+         * Since it is very unlikely that the new line separator changes during the
+         * program's execution, it is a good idea to store it in in a static variable.
+         */
+        String lineSeparator = System.lineSeparator();
+
+        /*
+         * The StringBuffer is used to created mutable strings.
+         * The StringBuilder class is the same as StringBuffer except that it is
+         * non-synchronized and hence thread-safe.
+         */
+        StringBuffer strB = new StringBuffer("study");
+        strB.append("tonight");
 
         StringBuilder stringBuilder = new StringBuilder();
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
@@ -177,6 +192,10 @@ public class Basics {
          * due to this change, but larger applications that load many classes or make
          * heavy use of the String.intern() method will face significant differences.
          */
+    }
+
+    private static void workingWithStringBuffers() {
+
     }
 
     private static void workingWithDates() {
