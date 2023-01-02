@@ -96,9 +96,9 @@ public class Basics {
         String lineSeparator = System.lineSeparator();
 
         /*
-         * The StringBuffer is used to created mutable strings.
+         * The StringBuffer is used to created mutable thread-safe strings.
          * The StringBuilder class is the same as StringBuffer except that it is
-         * non-synchronized and hence thread-safe.
+         * non-synchronized and hence non-thread-safe.
          */
         StringBuffer strB = new StringBuffer("study");
         strB.append("tonight");
