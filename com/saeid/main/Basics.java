@@ -15,6 +15,10 @@ public class Basics {
             myArray[counter++] = counter;
         } while (counter != myArray.length);
 
+        for (int i = 0; i < myArray.length; i++) {
+            ++myArray[i];
+        }
+
         int total = 0;
         // ForEach loops:
         for (int value : myArray) {
@@ -22,7 +26,7 @@ public class Basics {
         }
     }
 
-    private void workingWithTypes() {
+    private static void workingWithTypes() {
         boolean boolValue = Boolean.TRUE; // or set to true
 
         byte byteValue = Byte.MAX_VALUE;
@@ -95,7 +99,7 @@ public class Basics {
          */
     }
 
-    private void workingWithStrings() {
+    private static void workingWithStrings() {
         // See formats here:
         // https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
         String formatted = String.format(Locale.US, "$,d", 10000);
@@ -104,28 +108,34 @@ public class Basics {
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
 
         String strObj = new String("Hello!");
-        String str = "Hello!";
-        // The two string references point two strings that are equal
-        if (strObj.equals(str)) {
-            System.out.println("The strings are equal");
+        String str1 = "Hello!";
+        String str2 = "Hello!";
+
+        if (strObj.equals(str1)) {
+            System.out.println("strObj.equals(str1)");
         }
-        // The two string references do not point to the same object
-        if (strObj != str) {
-            System.out.println("The strings are not the same object");
+
+        if (strObj != str1) {
+            System.out.println("strObj != str1");
         }
+
+        if (str1 == str2) {
+            System.out.println("str1 == str2");
+        }
+
         // If we intern a string that is equal to a given literal, the result is
         // a string that has the same reference as the literal.
         String internedStr = strObj.intern();
-        if (internedStr == str) {
-            System.out.println("The interned string and the literal are the same object");
+        if (internedStr == str1) {
+            System.out.println("internedStr == str1");
         }
     }
 
-    private void workingWithDates() {
+    private static void workingWithDates() {
         Instant now = Instant.now();
     }
 
-    private Boolean typeChecking() {
+    private static Boolean typeChecking() {
         Object baseClass = new TestBaseClass();
         // Type checking:
         if (baseClass instanceof TestBaseClass) {
@@ -134,7 +144,7 @@ public class Basics {
         return false;
     }
 
-    private void underScoreUsage() {
+    private static void underScoreUsage() {
         byte color = 1_2_3;
         short yearsAnnoDomini = 2_016;
         int socialSecurtyNumber = 999_99_9999;
