@@ -68,6 +68,12 @@ public class Basics {
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
 
         Instant now = Instant.now();
+
+        /*
+         * In Java, we can convert between integer values and floating-point values. Also, since every character corresponds to
+         * a number in the Unicode encoding, char types can be converted to and from the integer and floating-point types.
+         * boolean is the only primitive datatype that cannot be converted to or from any other primitive datatype.
+         */
     }
 
     private Boolean typeChecking() {
@@ -98,6 +104,5 @@ public class Basics {
         // Adjacent to a decimal point in a floating point literal (e.g. 1._23 or 1_.23)
         // Prior to an F or L suffix (e.g. 1.23_F or 9999999_L are not valid)
         // In positions where a string of digits is expected (e.g. 0_xFFFF is not valid)
-
     }
 }
