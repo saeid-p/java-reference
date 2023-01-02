@@ -5,6 +5,24 @@ import java.time.Instant;
 
 public class Basics {
     public static void main(String[] args) {
+        int counter = 5;
+        while (counter > 0) {
+            counter--;
+        }
+
+        int[] myArray = new int[5];
+        do {
+            myArray[counter++] = counter;
+        } while (counter != myArray.length);
+
+        int total = 0;
+        // ForEach loops:
+        for (int value : myArray) {
+            total += value;
+        }
+    }
+
+    private void workingWithTypes() {
         boolean boolValue = Boolean.TRUE; // or set to true
 
         byte byteValue = Byte.MAX_VALUE;
@@ -25,22 +43,6 @@ public class Basics {
         // leading '0' to your decimal literals you will get the wrong value:
         int a = 0100; // Instead of 100, a == 64
 
-        int counter = 5;
-        while (counter > 0) {
-            counter--;
-        }
-
-        int[] myArray = new int[5];
-        do {
-            myArray[counter++] = counter;
-        } while (counter != myArray.length);
-
-        int total = 0;
-        // ForEach loops:
-        for (int value : myArray) {
-            total += value;
-        }
-
         char charValue = Character.MIN_VALUE;
         char charValueAssigned = 'X';
         String stringValue = "Test";
@@ -60,6 +62,40 @@ public class Basics {
         int compareTo = stringValue.compareTo("Test");
         int compareToCI = stringValue.compareToIgnoreCase("Test");
 
+        /*
+         * In Java, we can convert between integer values and floating-point values.
+         * Also, since every character corresponds to a number in the Unicode encoding,
+         * char types can be converted to and from the integer and floating-point types.
+         * boolean is the only primitive datatype that cannot be converted to or from
+         * any other primitive datatype.
+         */
+
+        /*
+         * boolean Boolean 1 byte / 16 bytes
+         * byte Byte 1 byte / 16 bytes
+         * short Short 2 bytes / 16 bytes
+         * char Char 2 bytes / 16 bytes
+         * int Integer 4 bytes / 16 bytes
+         * long Long 8 bytes / 16 bytes
+         * float Float 4 bytes / 16 bytes
+         * double Double 8 bytes / 16 bytes
+         */
+
+        /*
+         * Boxed objects always require 8 bytes for type and memory management, and
+         * because the size of objects is always a multiple of 8, boxed types all
+         * require 16 bytes total.
+         * In addition, each usage of a boxed object entails storing a reference which
+         * accounts for another 4 or 8 bytes, depending on the JVM and JVM options.
+         * In data-intensive operations, memory consumption can have a major impact on
+         * performance. Memory consumption grows even more when using arrays: a float[5]
+         * array will require only 32 bytes; whereas a Float[5] storing 5 distinct
+         * non-null values will require 112 bytes total (on 64 bit without compressed
+         * pointers, this increases to 152 bytes).
+         */
+    }
+
+    private void workingWithStrings() {
         // See formats here:
         // https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax
         String formatted = String.format(Locale.US, "$,d", 10000);
@@ -67,13 +103,26 @@ public class Basics {
         StringBuilder stringBuilder = new StringBuilder();
         String stringBuilt = stringBuilder.append("str 1").append("str 2").toString();
 
-        Instant now = Instant.now();
+        String strObj = new String("Hello!");
+        String str = "Hello!";
+        // The two string references point two strings that are equal
+        if (strObj.equals(str)) {
+            System.out.println("The strings are equal");
+        }
+        // The two string references do not point to the same object
+        if (strObj != str) {
+            System.out.println("The strings are not the same object");
+        }
+        // If we intern a string that is equal to a given literal, the result is
+        // a string that has the same reference as the literal.
+        String internedStr = strObj.intern();
+        if (internedStr == str) {
+            System.out.println("The interned string and the literal are the same object");
+        }
+    }
 
-        /*
-         * In Java, we can convert between integer values and floating-point values. Also, since every character corresponds to
-         * a number in the Unicode encoding, char types can be converted to and from the integer and floating-point types.
-         * boolean is the only primitive datatype that cannot be converted to or from any other primitive datatype.
-         */
+    private void workingWithDates() {
+        Instant now = Instant.now();
     }
 
     private Boolean typeChecking() {
