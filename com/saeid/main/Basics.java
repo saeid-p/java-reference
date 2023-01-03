@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -201,7 +202,7 @@ public class Basics {
          */
     }
 
-    private static void workingWithDates() {
+    private static void workingWithDates() throws ParseException {
         Instant now = Instant.now();
         Period oneMonthPeriod = Period.ofMonths(1);
         Instant newTime = now.plus(oneMonthPeriod);
@@ -220,7 +221,7 @@ public class Basics {
         String formattedDate = simpleDateFormat.format(someDate);
 
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.US);
-        String dateStr = "02/25/2016"; // input String
+        final String dateStr = "02/25/2016"; // input String
         Date myDate = dateFormat.parse(dateStr);        
 
         LocalDate lDate = LocalDate.now();
@@ -299,7 +300,7 @@ public class Basics {
                 Boolean.valueOf(birthdate.equals(samebirthdate)));
 
         // Use of LocalDate
-        final LocalDate now = LocalDate.now();
+        final LocalDate localNow = LocalDate.now();
         final LocalDate birthdate2 = LocalDate.of(2012, 6, 30);
         final LocalDate birthdate3 = LocalDate.of(2012, 6, 30);
         // Hours, minutes, second and nanoOfsecond can also be configured with an other
@@ -307,34 +308,34 @@ public class Basics {
         // LocalDateTime.of(year, month, dayOfMonth, hour, minute, second,
         // nanoOfSecond);
         // isBefore example
-        System.out.printf("Is %1$tF before %2$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.isBefore(birthdate2)));
-        System.out.printf("Is %1$tF before %1$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.isBefore(now)));
-        System.out.printf("Is %2$tF before %1$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(birthdate2.isBefore(now)));
+        System.out.printf("Is %1$tF before %2$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.isBefore(birthdate2)));
+        System.out.printf("Is %1$tF before %1$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.isBefore(localNow)));
+        System.out.printf("Is %2$tF before %1$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(birthdate2.isBefore(localNow)));
         // isAfter example
-        System.out.printf("Is %1$tF after %2$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.isAfter(birthdate2)));
-        System.out.printf("Is %1$tF after %1$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.isAfter(now)));
-        System.out.printf("Is %2$tF after %1$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(birthdate2.isAfter(now)));
+        System.out.printf("Is %1$tF after %2$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.isAfter(birthdate2)));
+        System.out.printf("Is %1$tF after %1$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.isAfter(localNow)));
+        System.out.printf("Is %2$tF after %1$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(birthdate2.isAfter(localNow)));
         // compareTo example
-        System.out.printf("Compare %1$tF to %2$tF %3$d%n", now, birthdate2,
-                Integer.valueOf(now.compareTo(birthdate2)));
-        System.out.printf("Compare %1$tF to %1$tF %3$d%n", now, birthdate2,
-                Integer.valueOf(now.compareTo(now)));
-        System.out.printf("Compare %2$tF to %1$tF %3$d%n", now, birthdate2,
-                Integer.valueOf(birthdate2.compareTo(now)));
+        System.out.printf("Compare %1$tF to %2$tF %3$d%n", localNow, birthdate2,
+                Integer.valueOf(localNow.compareTo(birthdate2)));
+        System.out.printf("Compare %1$tF to %1$tF %3$d%n", localNow, birthdate2,
+                Integer.valueOf(localNow.compareTo(localNow)));
+        System.out.printf("Compare %2$tF to %1$tF %3$d%n", localNow, birthdate2,
+                Integer.valueOf(birthdate2.compareTo(localNow)));
         // equals example
-        System.out.printf("Is %1$tF equal to %2$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.equals(birthdate2)));
+        System.out.printf("Is %1$tF equal to %2$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.equals(birthdate2)));
         System.out.printf("Is %1$tF to %2$tF? %3$b%n", birthdate2, birthdate3,
                 Boolean.valueOf(birthdate2.equals(birthdate3)));
         // isEqual example
-        System.out.printf("Is %1$tF equal to %2$tF? %3$b%n", now, birthdate2,
-                Boolean.valueOf(now.isEqual(birthdate2)));
+        System.out.printf("Is %1$tF equal to %2$tF? %3$b%n", localNow, birthdate2,
+                Boolean.valueOf(localNow.isEqual(birthdate2)));
         System.out.printf("Is %1$tF to %2$tF? %3$b%n", birthdate2, birthdate3,
                 Boolean.valueOf(birthdate2.isEqual(birthdate3)));
     }
