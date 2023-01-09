@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Collections {
 
@@ -46,7 +48,7 @@ public class Collections {
     Set<String> namesSet = new HashSet<>(
       Arrays.asList("Clementine", "Duran", "Mike")
     );
-    
+
     // Version ≥ Java SE 8
     namesSet.forEach(System.out::println);
     // Version ≥ Java SE 5
@@ -57,7 +59,7 @@ public class Collections {
     for (String name : namesSet) {
       System.out.println(name);
     }
-    
+
     // Version < Java SE 5
     Iterator iterator = namesSet.iterator();
     while (iterator.hasNext()) {
@@ -94,6 +96,18 @@ public class Collections {
       Map.Entry entry = (Map.Entry) entries.next();
       System.out.println(entry.getKey());
       System.out.println(entry.getValue());
-    }    
+    }
+
+    /**
+     * TreeSet: stores data in a sorted manner sacrificing some speed for basic operations which take O(lg(n)).
+     * It does not maintain the insertion order of items.
+     */
+    TreeSet<Integer> sortedSet = new TreeSet<Integer>();
+
+    /** LinkedHashSet: It is a linked list implementation of HashSet Once can iterate over the items in the order
+     *  they were added. Sorting is not provided for its contents. O(1) basic operations are provided, however there
+     * is higher cost than HashSet in maintaining the backing linked list.
+     */
+    LinkedHashSet<Integer> linkedhashset = new LinkedHashSet<Integer>();
   }
 }
